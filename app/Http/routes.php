@@ -9,7 +9,7 @@
 | It's a breeze. Simply tell Laravel the URIs it should respond to
 | and give it the controller to call when that URI is requested.
 |
-*/
+
 
 
 Route::get('/contact', function(){
@@ -21,10 +21,11 @@ Route::get('contact/index', function(){
 
     return view('contact.index');
 } );
-
-//Route::get('/', function () {
- //   return view('welcome');
-//});
+*/
+Route::get('/', function () {
+    $people = ['Jamila', 'Lucien', 'Angeleque'];
+    return view('welcome', compact('people'));
+});
 
 
 /*
