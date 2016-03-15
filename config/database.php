@@ -48,8 +48,8 @@ return [
 
         'sqlite' => [
             'driver'   => 'sqlite',
-            //'database' => database_path('storage/database.sqlite'),
-            'database' => 'storage/database.sqlite',
+            'database' => database_path('database.sqlite'),
+            //'database' => 'storage/database.sqlite',
             'prefix'   => '',
         ],
 
