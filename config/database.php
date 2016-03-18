@@ -26,7 +26,7 @@ return [
     |
     */
 
-    'default' => env('DB_CONNECTION', 'sqlite'),
+    'default' => env('DB_CONNECTION', 'mysql'),
 
     /*
     |--------------------------------------------------------------------------
@@ -55,16 +55,18 @@ return [
 
         'mysql' => [
             'driver'    => 'mysql',
-            'host'      => env('DB_HOST', 'localhost'),
-            'database'  => env('DB_DATABASE', 'lara'),
-            'username'  => env('DB_USERNAME', 'root'),
+            'host'      => env('DB_HOST', '127.0.0.1'),
+            'database'  => env('DB_DATABASE', 'laravel'),
+            'username'  => env('DB_USERNAME', 'admin'),
             'password'  => env('DB_PASSWORD', 'password'),
             'charset'   => 'utf8',
-            'collation' => 'utf8_unicode_ci',
+           'collation' => 'utf8_unicode_ci',
+					 //'collation' => 'utf8mb4_unicode_ci',
             'prefix'    => '',
             'strict'    => false,
             'engine'    => null,
-            'port' => '33060'
+            'port' => '8889', 
+						'socket' => '/Applications/MAMP/tmp/mysql/mysql.sock',
         ],
 
         'pgsql' => [

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Article;
-//use Illuminate\Http\Request;
+use Illuminate\Http\Request;
 
 
 //use App\Http\Requests;
@@ -18,6 +18,8 @@ class ArticlesController extends Controller
 
        $articles = Article::all();
         return view('articles.index', compact('articles'));
+				
+			 //return 'Test';
     }
 
     public function show($id)
@@ -34,13 +36,14 @@ class ArticlesController extends Controller
         return view('articles.create');
     }
 
-    public function store(){
+		
+		public function stores() {
+			
+			return 'Test'; 
+			//Article::create($request->all());
+			 //return redirect()->route('articles.index');
+		}
 
-       $input = Requests::all();
-
-        dd($input);
-
-        return $input;
-    }
+   
 
 }

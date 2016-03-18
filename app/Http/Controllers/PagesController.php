@@ -24,6 +24,11 @@ public function about(){
 
 
 public function contact(){
+	
+	
+ //$environment = App::environment(); 
+// echo $environment;
+   //return $environment; //view('articles.index', compact('articles'));
     return view ('pages.contact');
 
 }
