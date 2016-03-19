@@ -1,12 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-//use Illuminate\Http\Request;
-use App\Http\Requests; 
-use App\Article; 
-use Carbon\Carbon;
-use Request; 
-class ArticlesController extends Controller
+
+use Illuminate\Http\Request;
+
+use App\Http\Requests;
+
+class BookController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +15,7 @@ class ArticlesController extends Controller
      */
     public function index()
     {
-		  $articles = Article::latest('published_at')->get(); //all();
-		  return view('articles.index', compact('articles'));
+        //
     }
 
     /**
@@ -26,7 +25,7 @@ class ArticlesController extends Controller
      */
     public function create()
     {
-        return  view('articles.create');
+        //
     }
 
     /**
@@ -35,34 +34,9 @@ class ArticlesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    //public function store(Request $request)
-    public function store()
-		{
-			
-			
-			$input = Request::all(); 
-			$input['published_at'] = Carbon::now();
-			Article::create($input); 
-			
-			//Log::info($error);
-		
-//			$this->validate($request, [
-	//						'title'=>'required|max:255', 
-		//					'body'=>'required'
-			//					]); 
-		
-							
-			
-						//$article = new Article(); 
-						//$article ->title = $request->title; 
-						//$article ->body = $request->body; 
-						//$article->published_at = Carbon::now(); 
-						//$article->save(); 
-			
-						
-						return redirect()->route('articles.index');
-						//return redirect()->route('articles.show', $article->id);
-        
+    public function store(Request $request)
+    {
+        //
     }
 
     /**
@@ -73,9 +47,7 @@ class ArticlesController extends Controller
      */
     public function show($id)
     {
-		  $article = Article::findOrFail($id);
-   
-		   return view('articles.show', compact('article'));
+        //
     }
 
     /**

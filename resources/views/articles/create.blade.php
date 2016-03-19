@@ -5,8 +5,9 @@
 <h1>Write a New Article</h1>
 <hr/>
 
-<form>
-    {!! Form::open(['action' => 'ArticlesController@store', 'method' => 'post']) !!}
+<div>
+    {!! Form::open( ['route'=>'articles.store']) !!}
+		
     <div class="form-group">
     {!! Form::label('title', 'Title:') !!}
        {!! Form::text('title', null, ['class'=>'form-control']) !!}
@@ -17,12 +18,12 @@
         {!! Form::TextArea('body', null, ['class'=>'form-control']) !!}
     </div>
 
+
     <div>
-        {!!Form::submit('Add Article', ['class'=>'btn btn-primary form-control'])!!}
+        {!! Form::submit('Add Article', ['class'=>'btn btn-primary form-control']) !!}
+				{!! Form::close() !!}
     </div>
-    {!! Form::close() !!}
-</form>
+    
+</div>
 @stop
 
-@section('footer')
-@stop
