@@ -1,11 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-//use Illuminate\Http\Request;
+use Illuminate\Http\Request;
 use App\Http\Requests; 
+use App\Http\Requests\ArticleRequest; 
 use App\Article; 
 use Carbon\Carbon;
-use Request; 
+//use Request; 
 class ArticlesController extends Controller
 {
     /**
@@ -36,36 +37,12 @@ class ArticlesController extends Controller
      * @return \Illuminate\Http\Response
      */
     //public function store(Request $request)
-    public function store()
+    public function store(ArticleRequest $request)
 		{
-			
-			
-			//$input = Request::all(); 
-			//$input['published_at'] = Carbon::now();
-			//Article::create($input); 
-			
-			//$input = Request::all(); 
-			//$input['published_at'] = Carbon::now();
-			Article::create(Request::all());
-			
-			//Log::info($error);
-		
-//			$this->validate($request, [
-	//						'title'=>'required|max:255', 
-		//					'body'=>'required'
-			//					]); 
-		
-							
-			
-						//$article = new Article(); 
-						//$article ->title = $request->title; 
-						//$article ->body = $request->body; 
-						//$article->published_at = Carbon::now(); 
-						//$article->save(); 
-			
-						
-						return redirect()->route('articles.index');
-						//return redirect()->route('articles.show', $article->id);
+
+				Article::create($request->all());
+				return redirect()->route('articles.index');
+				//return redirect()->route('articles.show', $article->id);
         
     }
 
@@ -79,7 +56,8 @@ class ArticlesController extends Controller
     {
 		  $article = Article::findOrFail($id);
    
-			dd($article->published_at);
+			//return $id; 
+	 
 		   return view('articles.show', compact('article'));
     }
 
@@ -91,7 +69,12 @@ class ArticlesController extends Controller
      */
     public function edit($id)
     {
-        //
+			
+		//dd($id);	
+		$article = Article::findOrFail($id);
+		return view('articles.edit', compact('article'));  
+		
+		
     }
 
     /**
@@ -101,9 +84,11 @@ class ArticlesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ArticleRequest $request, $id)
     {
-        //
+        $article = Article::findOrFail($id);
+				$article->update($request->all());
+				return redirect('articles');
     }
 
     /**

@@ -49,7 +49,7 @@ Route::group(['middleware' => ['web']], function () {
 //	Route::get('articles/create', 'ArticlesController@create');
 //	Route::get('articles/{id}', 'ArticlesController@show');
 //	Route::post('articles', 'ArticlesController@store');
-	Route::resource('books','BookController');
+//s	Route::resource('books','BookController');
 	Route::resource('articles', 'ArticlesController');
     
 });
