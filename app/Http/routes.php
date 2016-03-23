@@ -10,22 +10,20 @@
 | and give it the controller to call when that URI is requested.
 |
 
-
+*/
 
 Route::get('/contact', function(){
 
-    return view('contact.contact');
+    return view('contact');
 } );
 
 Route::get('contact/index', function(){
 
     return view('contact.index');
 } );
-*/
-Route::get('/', function () {
-    $people = ['Jamila', 'Lucien', 'Angeleque'];
-    return view('welcome', compact('people'));
-});
+
+
+
 
 
 
@@ -41,15 +39,27 @@ Route::get('/', function () {
 */
 
 Route::group(['middleware' => ['web']], function () {
+
+	Route::get('/', function () 
+	{
+    	$people = ['Jamila', 'Lucien', 'Angeleque'];
+    	return view('welcome', compact('people'));
+	});
+
 	
-	
-//	Route::get('articles', 'ArticlesController@index');
-//	Route::get('about', 'PagesController@about');
-//	Route::get('contact', 'PagesController@contact');
-//	Route::get('articles/create', 'ArticlesController@create');
-//	Route::get('articles/{id}', 'ArticlesController@show');
-//	Route::post('articles', 'ArticlesController@store');
-//s	Route::resource('books','BookController');
+	Route::controllers
+	([
+		'auth'=>'Auth\AuthController', 
+		'passord' => 'Auth\PasswordController'	
+	]);
+
+    Route::resource('books','BookController');
 	Route::resource('articles', 'ArticlesController');
     
+});
+
+Route::group(['middleware' => 'web'], function () {
+    Route::auth();
+
+    Route::get('/home', 'HomeController@index');
 });

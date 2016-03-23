@@ -21,14 +21,15 @@ class ArticleRequest extends Request
      *
      * @return array
      */
+
     public function rules()
     {
          
 				return [
-											'title'=>'required|max:255|min:3', 
-											'body'=>'required', 
-											'published_at'=>'required|date'
+						'title'=>'required|max:255|min:3', 
+						'body'=>'required', 
+						'published_at'=>'required|date'
         ];
-				//return $rules; 
+
     }
 }

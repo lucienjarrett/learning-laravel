@@ -1,4 +1,4 @@
-@extends ('app')
+@extends ('layouts.app')
     @section ('content')
        <div>
            <p>About Page: {{ $first }} {{$last}}</p>

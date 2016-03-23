@@ -1,4 +1,4 @@
-@extends('app')
+@extends('layouts.app')
 @section('content')
 <h1>{{$article ->title }}</h1>
 <hr>
@@ -7,11 +7,6 @@
 
           {{ $article->body }}
     </article>
-
-
-
-
-
 
 
 @stop

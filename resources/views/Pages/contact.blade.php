@@ -1,4 +1,4 @@
-@extends ('app')
+@extends ('layouts.app')
 @section('content')
 
 <h2> Contacts Page</h2>

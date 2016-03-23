@@ -6,9 +6,22 @@ use App\Http\Requests;
 use App\Http\Requests\ArticleRequest; 
 use App\Article; 
 use Carbon\Carbon;
+//use Auth; 
 //use Request; 
 class ArticlesController extends Controller
 {
+    
+
+    /**
+    */
+   public function __construct()
+   {
+    //$this->middleware('auth', ['only'=>'create']); 
+    $this->middleware('auth'); 
+       # code...
+   }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -16,8 +29,10 @@ class ArticlesController extends Controller
      */
     public function index()
     {
-		  $articles = Article::latest('published_at')->published()->get(); //all();
-		  return view('articles.index', compact('articles'));
+        //return \Auth::user()->toArray(); 
+
+		  $articles = Article::latest('published_at')->published()->get(); 
+          return view('articles.index', compact('articles'));
     }
 
     /**
@@ -39,9 +54,13 @@ class ArticlesController extends Controller
     //public function store(Request $request)
     public function store(ArticleRequest $request)
 		{
+            $article = new Article($request->all());
+            Auth::user()->articles()->save($article);  
 
-				Article::create($request->all());
+				//Article::create($request->all());
 				return redirect()->route('articles.index');
+
+
 				//return redirect()->route('articles.show', $article->id);
         
     }

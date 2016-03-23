@@ -8,26 +8,17 @@ use Carbon\Carbon;
 class Article extends Model
 {
     //
-   protected $fillable = [ 'title', 'body', 'published_at'];
-	 //protected $dates = ['published_at']; 
-	// protected $table = 'articles'; 
-	/*
-	 public static function validate($input) {
-	                 $rules = array(
-										 'title'=>'required|max:255', 
-										 'body'=> 'required',
-										 'published_at'=>'required'
-	                 );
-									 return Validator::make($input, $rules);
-									 
-								 }
+   protected $fillable = [ 'title', 'body', 'published_at', 'user_id'];
+	
 	 
-	 */
+   protected $dates = ['published_at']; 
+
 	 public function scopePublished($query)
 	 {
 		 $query ->where('published_at', '<=', Carbon::now());
 		
 	 }
+
 	 public function scopeUnpublished($query)
 	 {
 		 $query ->where('published_at', '>', Carbon::now());
@@ -39,4 +30,16 @@ class Article extends Model
 	 	 $this->attributes['published_at'] = Carbon::parse( $date); 
 		
 	 }
+
+	
+	/**
+	 * An article is owned by a user. 
+	 */
+	public function user(){
+
+		return $this->belongsTo('App\User'); 
+	
+	}
+	
+	 
 }
