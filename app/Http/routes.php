@@ -53,6 +53,7 @@ Route::group(['middleware' => ['web']], function () {
 		'passord' => 'Auth\PasswordController'	
 	]);
 
+	//Route::model('articles', 'ArticlesController');
     Route::resource('books','BookController');
 	Route::resource('articles', 'ArticlesController');
     

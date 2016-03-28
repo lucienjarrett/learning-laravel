@@ -12,6 +12,13 @@
 	        {!! Form::label('published_at', 'Published On') !!}
 	        {!! Form::input('date','published_at',date('Y-m-d'), ['class'=>'form-control']) !!}
 	    </div>
+
+	    <div class="form-group">
+	        {!! Form::label('tags_list', 'Tags:') !!}
+	        {!! Form::select('tags_list[]',$tags,null, ['class'=>'form-control', 'multiple']) !!}
+	    </div>
+
+
 	    <div>
 	        {!! Form::submit($submitButton, ['class'=>'btn btn-primary form-control']) !!}
 					

@@ -47,6 +47,7 @@
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
+
                     <li><a href="{{ url('/home') }}">Home</a></li>
                 </ul>
 
@@ -72,11 +73,18 @@
         </div>
     </nav>
 
+
+
+   @include('flash::message')
     @yield('content')
 
     <!-- JavaScripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
+    <script>
+        $('div.alert').not('alert-important').delay(3000).slideUp(300); 
+
+    </script>
 </body>
 </html>

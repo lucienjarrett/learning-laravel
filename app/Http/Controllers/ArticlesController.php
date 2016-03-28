@@ -6,8 +6,9 @@ use App\Http\Requests;
 use App\Http\Requests\ArticleRequest; 
 use App\Article; 
 use Carbon\Carbon;
-//use Auth; 
-//use Request; 
+use Auth; 
+use App\Tag; 
+
 class ArticlesController extends Controller
 {
     
@@ -32,6 +33,8 @@ class ArticlesController extends Controller
         //return \Auth::user()->toArray(); 
 
 		  $articles = Article::latest('published_at')->published()->get(); 
+          
+
           return view('articles.index', compact('articles'));
     }
 
@@ -42,7 +45,8 @@ class ArticlesController extends Controller
      */
     public function create()
     {
-        return  view('articles.create');
+        $tags = Tag::lists('name', 'id'); 
+        return  view('articles.create', compact('tags'));
     }
 
     /**
@@ -54,9 +58,22 @@ class ArticlesController extends Controller
     //public function store(Request $request)
     public function store(ArticleRequest $request)
 		{
-            $article = new Article($request->all());
-            Auth::user()->articles()->save($article);  
+            //$article = new Article($request->all());
 
+           
+            //$article = Auth::user()->articles()->save($article); 
+            $article = Auth::user()->articles()->create($request->all());
+        
+            
+            //$tagIds = $request->input('tags'); 
+            //dd($article->tags()->attach($request->input('tags')));
+
+            $article->tags()->attach($request->input('tags'));  
+            flash()->success('Your article has been created.');
+
+//$request->session()->flash('flash_message', 'Your article has been created.');   
+
+  //           $request->session()->flash('flash_message_important', true);      
 				//Article::create($request->all());
 				return redirect()->route('articles.index');
 
@@ -71,13 +88,12 @@ class ArticlesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Article $article)
     {
-		  $article = Article::findOrFail($id);
-   
-			//return $id; 
+        //  dd($id); 
+       // $article = Article::findOrFail($id);
 	 
-		   return view('articles.show', compact('article'));
+		return view('articles.show', compact('article'));
     }
 
     /**
@@ -86,13 +102,10 @@ class ArticlesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Article $article)
     {
-			
-		//dd($id);	
-		$article = Article::findOrFail($id);
-		return view('articles.edit', compact('article'));  
-		
+		$tags = Tag::lists('name', 'id'); 
+		return view('articles.edit', compact('article', 'tags'));  	
 		
     }
 

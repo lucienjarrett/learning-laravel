@@ -49,7 +49,6 @@ return [
         'sqlite' => [
             'driver'   => 'sqlite',
             'database' => database_path('database.sqlite'),
-            //'database' => 'storage/database.sqlite',
             'prefix'   => '',
         ],
 
@@ -57,16 +56,15 @@ return [
             'driver'    => 'mysql',
             'host'      => env('DB_HOST', '127.0.0.1'),
             'database'  => env('DB_DATABASE', 'laravel'),
-            'username'  => env('DB_USERNAME', 'admin'),
-            'password'  => env('DB_PASSWORD', 'password'),
+            'username'  => env('DB_USERNAME', 'root'),
+            'password'  => env('DB_PASSWORD', 'root'),
             'charset'   => 'utf8',
-           'collation' => 'utf8_unicode_ci',
-					 //'collation' => 'utf8mb4_unicode_ci',
+           'collation'  => 'utf8_unicode_ci',
             'prefix'    => '',
             'strict'    => false,
             'engine'    => null,
-            'port' => '8889', 
-						'socket' => '/Applications/MAMP/tmp/mysql/mysql.sock',
+            'port'      => '8889', 
+			'socket'    => '/Applications/MAMP/tmp/mysql/mysql.sock',
         ],
 
         'pgsql' => [

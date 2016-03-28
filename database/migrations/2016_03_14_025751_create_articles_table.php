@@ -35,6 +35,7 @@ class CreateArticlesTable extends Migration
      */
     public function down()
     {
+        Schema::drop('article_tag');
         Schema::drop('articles');
     }
 }
