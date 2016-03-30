@@ -16,7 +16,6 @@
 <ul>
 @foreach ($article->tags as $tag)
 <li> {{ $tag->name }} </li>
-{{var_dump($tag)}}
 @endforeach 	
 </ul>
 @endunless
@@ -25,3 +24,4 @@
 
 @section('footer')
 @stop
+

@@ -65,10 +65,14 @@ class ArticlesController extends Controller
             $article = Auth::user()->articles()->create($request->all());
         
             
+
             //$tagIds = $request->input('tags'); 
             //dd($article->tags()->attach($request->input('tags')));
+            //dd($request->input('tag_list')); 
+            //$tags = Input::get('tag_list');
+            //dd($tags);    
 
-            $article->tags()->attach($request->input('tags'));  
+            $article->tags()->attach($request->input('tag_list'));  
             flash()->success('Your article has been created.');
 
 //$request->session()->flash('flash_message', 'Your article has been created.');   
