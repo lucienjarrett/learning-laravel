@@ -175,7 +175,7 @@ class ArticlesController extends Controller
     public function synchTags(Article $article, array $tags)
     {
 
-        $article->tags()->sync($request->input('tag_list')); 
+        $article->tags()->sync($tags); 
     }
 
     /**
