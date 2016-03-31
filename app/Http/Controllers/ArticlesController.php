@@ -62,20 +62,22 @@ class ArticlesController extends Controller
 
            
             //$article = Auth::user()->articles()->save($article); 
-            $article = Auth::user()->articles()->create($request->all());
-        
             
+            $this->createArticle($request);
+
+           
 
             //$tagIds = $request->input('tags'); 
             //dd($article->tags()->attach($request->input('tags')));
             //dd($request->input('tag_list')); 
             //$tags = Input::get('tag_list');
-            //dd($tags);    
+            
 
-            $article->tags()->attach($request->input('tag_list'));  
+            
+            //$article->tags()->synch($request->input('tag_list'));  
             flash()->success('Your article has been created.');
 
-//$request->session()->flash('flash_message', 'Your article has been created.');   
+                //$request->session()->flash('flash_message', 'Your article has been created.');   
 
   //           $request->session()->flash('flash_message_important', true);      
 				//Article::create($request->all());
@@ -94,8 +96,8 @@ class ArticlesController extends Controller
      */
     public function show(Article $article)
     {
-        //  dd($id); 
-       // $article = Article::findOrFail($id);
+        //  dd($article); 
+        //$article = Article::findOrFail($id);
 	 
 		return view('articles.show', compact('article'));
     }
@@ -106,12 +108,30 @@ class ArticlesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Article $article)
-    {
-		$tags = Tag::lists('name', 'id'); 
-		return view('articles.edit', compact('article', 'tags'));  	
+     public function edit(Article $article)
+     {
+		 $tags = Tag::lists('name', 'id'); 
+        
+
+         $article = Article::findOrFail($article->id); 
+         //dd($article);
+		 return view('articles.edit', compact('article', 'tags'));  	
 		
-    }
+     }
+  
+
+    //    public function edit($id)
+    // {
+    //     $tags = Tag::lists('name', 'id'); 
+        
+    //     //dd($id->id); 
+
+    //     $article = Article::find($id->id); 
+    //     //dd($article);
+    //     return view('articles.edit', compact('article', 'tags'));   
+        
+    // }
+
 
     /**
      * Update the specified resource in storage.
@@ -120,11 +140,20 @@ class ArticlesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ArticleRequest $request, $id)
+    public function update(ArticleRequest $request, Article $article)
     {
-        $article = Article::findOrFail($id);
-				$article->update($request->all());
-				return redirect('articles');
+        
+       // dd($request);       
+        //$article = Article::findOrFail($id->id);
+		$article->update($request->all());
+
+//dd($request); 
+
+        //$article->tags()->sync($request->input('tag_list')); 
+
+        $this->synchTags($article, $request->input('tag_list')); 
+
+		return redirect('articles');
     }
 
     /**
@@ -136,5 +165,30 @@ class ArticlesController extends Controller
     public function destroy($id)
     {
         //
+    }
+    /**
+     * Sync up the list of tags in the database
+     * @param  Article $article [description]
+     * @param  array   $tags    [description]
+     * @return [type]           [description]
+     */
+    public function synchTags(Article $article, array $tags)
+    {
+
+        $article->tags()->sync($request->input('tag_list')); 
+    }
+
+    /**
+    * [createArticle description]
+    * @param  ArticleRequest $request [description]
+    * @return [type]                  [description]
+    */
+    public function createArticle(ArticleRequest $request)
+    {
+         $article = Auth::user()->articles()->create($request->all());
+        
+         $article->tags()->attach($request->input('tag_list')); 
+
+        return $article; 
     }
 }
